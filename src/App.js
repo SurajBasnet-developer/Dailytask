@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
-function App() {
+import CardContent from "@mui/material/CardContent";
+import "./index.css";
+
+const App = () => {
+  const [input, setInput] = useState("");
+
+  const [todos, setTodos] = useState([]);
+  const Add = () => {
+    setTodos([...todos, input]);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <center>
+      <CardContent>
+        <div>
+          <h3>Todo list</h3>
+          <TextField
+            onChange={(event) => setInput(event.target.value)}
+            id="outlined-basic"
+            label="Add your tasks"
+            variant="outlined"
+          />
+          <br /> <br></br>
+          <Button onClick={() => Add()} variant="contained">
+            Add Tasks
+          </Button>
+          <ol className="center">
+            {todos.map((todo) => (
+              <li>{todo}</li>
+            ))}
+          </ol>
+        </div>
+      </CardContent>
+    </center>
   );
-}
+};
 
 export default App;
